@@ -1,12 +1,22 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts, postContact } from 'service/api';
 import contactsReducer, { deleteContact } from 'redux/contactsSlice';
+import filterSlice from 'redux/filterSlice';
 import styles from './ContactList.module.css';
 
 export default function ContactList() {
   const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(state => state.filter.value);
   const dispatch = useDispatch(contactsReducer);
   const renderContactList = () => contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+
+  useEffect(() => {
+    // postContact({
+    //   'name': "Lilia Lomaka",
+    //   'phone': "345-675-9523"});
+    fetchContacts().then(data => console.log(data));
+});
 
   return (
     <ul>

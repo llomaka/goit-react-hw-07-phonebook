@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  'items': [],
-  'filter': ''
+  'items': []
 };
 
 const contactsSlice = createSlice({
@@ -15,11 +14,10 @@ const contactsSlice = createSlice({
     deleteContact(state, action) {
       state.items = state.items.filter(item => item.id !== action.payload);
     },
-    changeFilter(state, action) {
-      state.filter = action.payload;
-    },
   },
 })
 
-export const { addContact, deleteContact, changeFilter } = contactsSlice.actions;
+export const { addContact, deleteContact } = contactsSlice.actions;
 export default contactsSlice.reducer;
+
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
