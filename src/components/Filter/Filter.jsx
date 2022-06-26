@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import filterSlice, { changeFilter } from 'redux/filterSlice';
+import { DebounceInput } from 'react-debounce-input';
 import styles from './Filter.module.css';
 
 export default function Filter() {
@@ -11,7 +12,9 @@ export default function Filter() {
     return (
       <>
         <h2 className={styles.header}>Find contacts by name</h2>
-        <input
+        <DebounceInput
+          element='input'
+          debounceTimeout={700}
           className={styles.input}
           type='text'
           name='filter'
