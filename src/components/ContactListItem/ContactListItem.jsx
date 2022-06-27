@@ -22,7 +22,7 @@ export default function ContactListItem({ contact }) {
         onClick={() => handleClick(id, name)}
         disabled={isLoading}
       >
-        {isLoading && <ClipLoader size={16} />}
+        {isLoading && <ClipLoader size={16} color='#fff' />}
         {!isLoading && <span>Delete</span>}
       </button>
     </>

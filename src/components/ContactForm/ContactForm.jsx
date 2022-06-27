@@ -87,7 +87,7 @@ export default function ContactForm() {
         name='submit_button'
         disabled={isLoading}
       >
-        {isLoading && <ClipLoader size={16} />}
+        {isLoading && <ClipLoader size={16} color='#fff' />}
         {!isLoading && <span>Add contact</span>}
       </button>
     </form>
