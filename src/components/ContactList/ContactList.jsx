@@ -13,7 +13,7 @@ export default function ContactList({contacts}) {
         id={contact.id}
         className={styles.item}
       >
-        {contact.name}: {contact.number}
+        {contact.name}: {contact.phone}
         <button
           className={styles.button}
           type='button'
@@ -30,7 +30,7 @@ export default function ContactList({contacts}) {
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       phone: PropTypes.string.isRequired,
     })
