@@ -9,7 +9,7 @@ import styles from './App.module.css';
 export default function App() {
   const { data = [], isError, error, isLoading, isSuccess } = useGetAllContactsQuery();
   const filter = useSelector(state => state.filter.value);
-  const renderContactList = () => data.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+  const renderContactList = () => data.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name));
 
 
   return (
