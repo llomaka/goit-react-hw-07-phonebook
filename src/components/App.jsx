@@ -2,6 +2,7 @@ import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import { useGetAllContactsQuery } from 'service/contactsApi';
 
 import styles from './App.module.css';
@@ -9,8 +10,7 @@ import styles from './App.module.css';
 export default function App() {
   const { data = [], isError, error, isLoading, isSuccess } = useGetAllContactsQuery();
   const filter = useSelector(state => state.filter.value);
-  const renderContactList = () => data.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name));
-
+  const renderContactList = useMemo(() => data.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)), [data, filter]);
 
   return (
     <div
@@ -32,7 +32,7 @@ export default function App() {
       {isError && (<p>An error occurred: {error}</p>)}
       {isLoading && <p>Loading...</p>}
       <Filter />
-      {isSuccess && <ContactList contacts={renderContactList()} />}
+      {isSuccess && <ContactList contacts={renderContactList} />}
     </div>
   );
 };
