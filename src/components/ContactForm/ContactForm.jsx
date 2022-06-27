@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { usePostContactMutation, useGetAllContactsQuery } from 'service/contactsApi';
 import { nanoid } from 'nanoid';
+import ClipLoader from "react-spinners/ClipLoader";
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
@@ -9,7 +10,7 @@ export default function ContactForm() {
   const nameInputId = nanoid();
   const phoneInputId = nanoid();
   const { data } = useGetAllContactsQuery();
-  const [addContact] = usePostContactMutation();
+  const [addContact, { isLoading }] = usePostContactMutation();
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -82,8 +83,10 @@ export default function ContactForm() {
         className={styles.button}
         type='submit'
         name='submit_button'
+        disabled={isLoading}
       >
-        Add contact
+        {isLoading && <ClipLoader size={16} />}
+        {!isLoading && <span>Add contact</span>}
       </button>
     </form>
   );

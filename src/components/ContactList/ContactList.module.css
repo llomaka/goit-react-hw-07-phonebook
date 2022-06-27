@@ -34,3 +34,8 @@
 .button:active {
   background-color: #500000;
 }
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

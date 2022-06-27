@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import { useDeleteContactByIdMutation } from 'service/contactsApi';
+import ClipLoader from "react-spinners/ClipLoader";
 import styles from './ContactList.module.css';
 
 export default function ContactList({contacts}) {
-  const [deleteContact] = useDeleteContactByIdMutation();
+  const [deleteContact, { isLoading }] = useDeleteContactByIdMutation();
+
+  const handleClick = (id, name) => {
+    deleteContact(id);
+    // alert(`Contact ${name} id successfully deleted!`);
+  };
 
   return (
     <ul>
@@ -17,9 +23,11 @@ export default function ContactList({contacts}) {
         <button
           className={styles.button}
           type='button'
-          onClick={() => deleteContact(contact.id)}
+          onClick={() => handleClick(contact.id, contact.name)}
+          disabled={isLoading}
         >
-          Delete
+          {isLoading && <ClipLoader size={16} />}
+          {!isLoading && <span>Delete</span>}
         </button>
       </li>)
       )}
