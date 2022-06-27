@@ -1,6 +1,6 @@
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
-import Filter from './Filter/Filter';
+import Filter from './Filter';
 import { useSelector } from 'react-redux';
 import { useGetAllContactsQuery } from 'service/contactsApi';
 
@@ -29,7 +29,7 @@ export default function App() {
       <h1 className={styles.header}>Phonebook</h1>
       <ContactForm />
       <h2 className={styles.subheader}>Contacts</h2>
-      {isError && (<p>An error ocurred: {error.message}</p>)}
+      {isError && (<p>An error occurred: {error}</p>)}
       {isLoading && <p>Loading...</p>}
       <Filter />
       {isSuccess && <ContactList contacts={renderContactList()} />}
