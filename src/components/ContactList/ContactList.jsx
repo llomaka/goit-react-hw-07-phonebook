@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDeleteContactByIdMutation } from 'service/contactsApi';
 import ClipLoader from "react-spinners/ClipLoader";
+import { toast } from 'react-toastify';
 import styles from './ContactList.module.css';
 
 export default function ContactList({contacts}) {
@@ -8,7 +9,7 @@ export default function ContactList({contacts}) {
 
   const handleClick = (id, name) => {
     deleteContact(id);
-    // alert(`Contact ${name} id successfully deleted!`);
+    toast.info(`Contact ${name} id successfully deleted!`);
   };
 
   return (

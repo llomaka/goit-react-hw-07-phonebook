@@ -1,6 +1,7 @@
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
+ import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useGetAllContactsQuery } from 'service/contactsApi';
@@ -10,7 +11,11 @@ import styles from './App.module.css';
 export default function App() {
   const { data = [], isError, error, isLoading, isSuccess } = useGetAllContactsQuery();
   const filter = useSelector(state => state.filter.value);
-  const renderContactList = useMemo(() => data.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)), [data, filter]);
+  const renderContactList = useMemo(() =>
+    data
+      .filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
+      .sort((a, b) => a.name.localeCompare(b.name)
+    ), [data, filter]);
 
   return (
     <div
@@ -33,6 +38,12 @@ export default function App() {
       {isLoading && <p>Loading...</p>}
       <Filter />
       {isSuccess && <ContactList contacts={renderContactList} />}
+      <ToastContainer
+        position='top-center'
+        newestOnTop={true}
+        style={{ fontSize: '20px' }}
+        theme='colored'
+      />
     </div>
   );
 };

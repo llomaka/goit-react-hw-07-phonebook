@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { usePostContactMutation, useGetAllContactsQuery } from 'service/contactsApi';
 import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
 import styles from './ContactForm.module.css';
 
@@ -29,9 +30,10 @@ export default function ContactForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (data?.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
-      return alert(`${name} is already in Contacts List!`);
+      return toast.warning(`${name} is already in Contacts List!`);
     }
     await addContact({ name, phone });
+    // toast.info(`${name} is successfully added to Contacts List!`);
     resetForm();
   };
 
